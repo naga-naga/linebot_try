@@ -60,14 +60,27 @@ def hands_to_int(userhand):
 	if userhand == "パー":
 		return 2
  
-def judge(userhand, bosshand):
-	temp = (userhand - bosshand + 3) % 3
-	if temp == 0:
-		return "あいこ"
-	elif temp == 1:
-		return "あなたの負けです"
-	else temp == 2:
-		return "あなたの価値です"
+def judge(userhand, bothand):
+    #0:あいこ　1:botの勝ち　2:userの勝ち
+    status = (userhand - bothand + 3) % 3
+
+    if status == 0:
+        message = StickerSendMessage(
+            package_id = random.randint(1, 4), #数字が変わるとスタンプ変わるかも〜
+            sticker_id = random.randint(1, 4) #数字が変わるとスタンプ変わるかも〜
+        )
+   elif status == 1:
+        message = AudioSendMessage(
+            original_content_url = "https://(herokuのアプリ名).herokuapp.com/static/audios/(音声ファイルの名前)",
+            duration = (音声ファイルの長さ) #単位はms(ミリセカンド)
+        )
+    elif status == 2:
+        message = ImageSendMessage(
+            original_content_url = "https://(herokuのアプリ名).herokuapp.com/static/images/(画像ファイルの名前)",
+            previewImageUrl = "https://(herokuのアプリ名).herokuapp.com/static/images/(画像ファイルの名前)"
+        )
+
+    return message
 
 if __name__ == "__main__":
 #    app.run()
