@@ -74,7 +74,7 @@ def judge(userhand, bothand):
     elif status == 2:
         message = ImageSendMessage(
             original_content_url = "https://linebot20200220.herokuapp.com/static/images/maxresdefault.jpg", 
-            previewImageUrl = "https://linebot20200220.herokuapp.com/static/images/maxresdefault.jpg"
+            preview_image_url = "https://linebot20200220.herokuapp.com/static/images/maxresdefault.jpg"
         )
 
             # 画像置くのが、めんどくさい人向け
