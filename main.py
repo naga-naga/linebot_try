@@ -40,15 +40,13 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
 
-    # message = event.message.text                     <--- コメントアウト
-    # message = hands_to_int(event.message.text)       <--- コメントアウト
-    # message = select_bothand()                       <--- コメントアウト
+def handle_message(event):
     message = judge(hands_to_int(event.message.text), select_bothand())
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=message))
+        message
+    )
 
 def select_bothand():
     return random.randint(0, 2)
@@ -61,19 +59,30 @@ def hands_to_int(userhand):
 	if userhand == "パー":
 		return 2
  
-def judge(userhand, bosshand):
-	temp = (userhand - bosshand + 3) % 3
-	if temp == 0:
-        message = "あいこ"
-	elif temp == 1: # 負け
+
+def judge(userhand, bothand):
+    #0:あいこ　1:botの勝ち　2:userの勝ち
+    status = (userhand - bothand + 3) % 3
+
+    if status == 0:
+        message = TextSendMessage(text="あいこだよーん")
+    elif status == 1: # 負け
         message = AudioSendMessage(
             original_content_url="https://linebot20200220.herokuapp.com/static/audios/stupid5.mp3",
             duration=2000
         )
-	else:
-        message = "あなたの勝ちです"
-    
+    elif status == 2:
+        message = ImageSendMessage(
+            original_content_url = "https://linebot20200220.herokuapp.com/static/images/maxresdefault.jpg", 
+            previewImageUrl = "https://linebot20200220.herokuapp.com/static/images/maxresdefault.jpg"
+        )
+
+            # 画像置くのが、めんどくさい人向け
+            # https://dol.ismcdn.jp/mwimgs/c/8/670m/img_c8dad835c4b9134b067cc8b8efcab22f143142.jpg
+            # をoriginal_content_urlとpreviewImageUrlにぶち込んでください
+
     return message
+
 
 if __name__ == "__main__":
 #    app.run()
