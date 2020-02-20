@@ -46,6 +46,9 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=message))
 
+def select_bothand():
+    return random.randint(0, 2)
+
 
 if __name__ == "__main__":
 #    app.run()
