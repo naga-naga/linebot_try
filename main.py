@@ -41,10 +41,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    #message = event.message.text
-    #message = select_bothand()
-    message = hands_to_int(event.message.text)
-
+    # message = event.message.text                     <--- コメントアウト
+    # message = hands_to_int(event.message.text)       <--- コメントアウト
+    # message = select_bothand()                       <--- コメントアウト
+    message = judge(hands_to_int(event.message.text), select_bothand())
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=message))
@@ -60,6 +60,14 @@ def hands_to_int(userhand):
 	if userhand == "パー":
 		return 2
  
+def judge(userhand, bosshand):
+	temp = (userhand - bosshand + 3) % 3
+	if temp == 0:
+		return "あいこ"
+	elif temp == 1:
+		return "あなたの負けです"
+	else temp == 2:
+		return "あなたの価値です"
 
 if __name__ == "__main__":
 #    app.run()
