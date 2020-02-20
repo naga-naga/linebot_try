@@ -61,8 +61,8 @@ def judge(userhand, bothand):
         message = TextSendMessage(text="あなたのか...負けダヨーン")
     elif status == 2:
         message = ImageSendMessage(
-            original_content_url = "https://linebot20200220.herokuapp.com/static/images/winimg.png", 
-            previewImageUrl = "https://linebot20200220.herokuapp.com/static/images/winimg.png"
+            original_content_url = "https://linebot20200220.herokuapp.com/static/images/maxresdefault.jpg", 
+            previewImageUrl = "https://linebot20200220.herokuapp.com/static/images/maxresdefault.jpg"
         )
 
             # 画像置くのが、めんどくさい人向け
@@ -73,7 +73,6 @@ def judge(userhand, bothand):
 
 
 
- 
 
 if __name__ == "__main__":
 #    app.run()
