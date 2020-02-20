@@ -41,10 +41,14 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = event.message.text
+    #message = event.message.text
+    message = select_bothand()
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=message))
+
+def select_bothand():
+    return random.randint(0, 2)
 
 
 if __name__ == "__main__":
