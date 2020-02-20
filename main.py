@@ -41,6 +41,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+
     # message = event.message.text                     <--- コメントアウト
     # message = hands_to_int(event.message.text)       <--- コメントアウト
     # message = select_bothand()                       <--- コメントアウト
@@ -66,7 +67,7 @@ def judge(userhand, bosshand):
 		return "あいこ"
 	elif temp == 1:
 		return "あなたの負けです"
-	else temp == 2:
+	else:
 		return "あなたの価値です"
 
 if __name__ == "__main__":
