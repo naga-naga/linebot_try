@@ -42,7 +42,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     #message = event.message.text
-    message = select_bothand()
+    #message = select_bothand()
+    message = hands_to_int(event.message.text)
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=message))
@@ -50,6 +52,14 @@ def handle_message(event):
 def select_bothand():
     return random.randint(0, 2)
 
+def hands_to_int(userhand):
+	if userhand == "グー":
+		return 0
+	if userhand == "チョキ":
+		return 1
+	if userhand == "パー":
+		return 2
+ 
 
 if __name__ == "__main__":
 #    app.run()
