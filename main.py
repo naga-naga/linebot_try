@@ -64,11 +64,16 @@ def hands_to_int(userhand):
 def judge(userhand, bosshand):
 	temp = (userhand - bosshand + 3) % 3
 	if temp == 0:
-		return "あいこ"
-	elif temp == 1:
-		return "あなたの負けです"
+        message = "あいこ"
+	elif temp == 1: # 負け
+        message = AudioSendMessage(
+            original_content_url="https://linebot20200220.herokuapp.com/static/audios/stupid5.mp3",
+            duration=2000
+        )
 	else:
-		return "あなたの価値です"
+        message = "あなたの勝ちです"
+    
+    return message
 
 if __name__ == "__main__":
 #    app.run()
